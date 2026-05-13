@@ -1,0 +1,47 @@
+[
+  {
+    "company_id": "tgt_1777922092_0_mock",
+    "company_name": "TechCorp Innovations",
+    "company_linkedin": "https://www.linkedin.com/company/techcorp-innovations",
+    "company_website": null,
+    "hr_name": null,
+    "hr_linkedin": null,
+    "ceo_name": null,
+    "ceo_linkedin": null,
+    "job_title": "Senior Frontend",
+    "job_url": "https://www.linkedin.com/jobs/view/1234567890",
+    "apply_type": "easy_apply",
+    "location": "Remote",
+    "status": "applied"
+  },
+  {
+    "company_id": "tgt_1777922092_1_mock",
+    "company_name": "Global Systems Solutions",
+    "company_linkedin": "https://www.linkedin.com/company/global-systems",
+    "company_website": null,
+    "hr_name": null,
+    "hr_linkedin": null,
+    "ceo_name": null,
+    "ceo_linkedin": null,
+    "job_title": "Frontend Engineer",
+    "job_url": "https://www.linkedin.com/jobs/view/0987654321",
+    "apply_type": "external",
+    "location": "Remote",
+    "status": "pending"
+  },
+  {
+    "company_id": "tgt_1777922092_2_mock",
+    "company_name": "StartupX",
+    "company_linkedin": "https://www.linkedin.com/company/startupx",
+    "company_website": null,
+    "hr_name": null,
+    "hr_linkedin": null,
+    "ceo_name": null,
+    "ceo_linkedin": null,
+    "job_title": "Lead Frontend",
+    "job_url": "https://www.linkedin.com/jobs/view/1122334455",
+    "apply_type": "easy_apply",
+    "location": "Remote",
+    "status": "pending"
+  }
+]

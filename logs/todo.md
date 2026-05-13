@@ -1,0 +1,41 @@
+## Active Sprint
+
+- [~] Git Integration
+    - [~] P0-01: Initialize git and push to GitHub
+
+- [x] Project Scaffolding & Backend Foundation
+- [~] Phase 1: Profile Foundation
+    - [~] P1-01: Load `data/profile.json` on app start
+    - [~] P1-02: Display completeness score and missing fields
+    - [~] P1-03: Allow manual field completion via UI form
+    - [~] P1-04: Validate JSON schema on load
+- [x] Phase 2: Job Discovery
+    - [x] P2-01: Groq suggests job roles
+    - [x] P2-02: User selects role
+    - [x] P2-03: User enters location
+    - [x] P2-04: User sets search radius
+    - [x] P2-05: Apify scrapes LinkedIn jobs
+    - [x] P2-07: Save results to `data/targets.json`
+- [x] Phase 3: Company Research
+    - [x] P3-01: Scrape company LinkedIn
+    - [x] P3-02: Scrape CEO LinkedIn posts
+    - [x] P3-03: Scrape HR LinkedIn posts
+    - [x] P3-05: Groq synthesizes hiring persona
+- [x] Phase 4: GAN-Style CV Generation Loop
+    - [x] P4-01: Groq Instance B generates CV JSON
+    - [x] P4-02: Groq Instance A scores CV
+    - [x] P4-03: Feedback loop (score < 9)
+    - [x] P4-06: Render final CV to PDF
+    - [x] P4-07: GAN loop for cover letter
+- [x] Phase 5: Auto Apply
+    - [x] P5-01: Automate LinkedIn Easy Apply (Playwright)
+    - [x] P5-02: Send email via Brevo SMTP
+    - [x] P5-04: Rate limiting and human-like behavior
+    - [x] P5-06: Update `history.json` on success
+- [ ] Phase 6: Tracking Dashboard
+    - [ ] P6-01: Display applications table
+    - [ ] P6-04: Manual status update
+- [x] Phase 7: Interview Simulator
+    - [x] P7-03: Groq role-play as interviewer
+    - [x] P7-04: "Help Me" button logic
+    - [x] P7-05: performance scoring

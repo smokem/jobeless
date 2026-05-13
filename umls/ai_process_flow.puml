@@ -1,0 +1,35 @@
+@startuml
+participant "System Orchestrator" as System
+participant "Groq API Layer" as AI
+participant "Data Store (JSON)" as DB
+
+== Phase 2: AI Role Discovery ==
+System -> AI: Profile JSON + Instruct to suggest roles
+AI --> System: 8 Target Roles (JSON)
+System -> DB: Return to User & Save
+
+== Phase 3: Research Persona Synthesis ==
+System -> AI: Parsed LinkedIn posts & Company Info
+AI --> System: Synthesized Hiring Persona (JSON)
+System -> DB: Save schema bounded macro-persona metadata
+
+== Phase 4: GAN Document Generation Loop ==
+loop Until Quality Score >= 9.0 (Max 5x)
+  System -> AI (Agent A - Generator): Generate targeted CV based on computed Persona
+  AI (Agent A) --> System: Raw CV Draft JSON
+  System -> AI (Agent B - Discriminator): Scrutinize CV explicitly against Persona
+  AI (Agent B) --> System: Output critical Score & Edit flags
+end
+System -> DB: Compile & Serialize final optimized CV JSON
+
+== Phase 7: Stateful Interview Simulation ==
+System -> AI: System Prompt + Core Persona logic context
+AI --> System: Returns native introductory question
+loop Interview Active Ping-Pong
+  System -> AI: Candidate message + Append chat transcript
+  AI --> System: Generates authenticated Persona Reaction natively maintaining constraints
+end
+System -> AI: Terminate simulation. Aggregate historical run.
+AI --> System: Detailed scoring output + Metrics
+System -> DB: Archive transcript log & append feedback metrics.
+@enduml

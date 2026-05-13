@@ -1,0 +1,33 @@
+@startuml phase2_discovery
+' Sequence diagram: Groq receives profile.json → suggests roles → user selects role + location + radius → Apify scrapes LinkedIn jobs → results written to targets.json → UI displays count → user reviews and de-selects
+
+actor User
+participant "Discovery UI" as UI
+participant "Discovery Service" as Service
+participant "Groq Service" as Groq
+participant "Apify Service" as Apify
+database "JSON Store" as Store
+
+User -> UI : Enter Discovery Phase
+UI -> Service : get_role_suggestions()
+Service -> Store : read("profile.json")
+Store --> Service : profile_data
+Service -> Groq : suggest_roles(profile_data)
+Groq --> Service : list_of_roles
+Service --> UI : roles
+UI -> User : Show suggestions
+
+User -> UI : Select role, location, radius
+UI -> Service : start_discovery(role, loc, rad)
+Service -> Apify : run_linkedin_jobs_scraper(role, loc, rad)
+Apify --> Service : raw_jobs_list
+Service -> Store : write("targets.json", jobs_list)
+Store --> Service : success
+Service --> UI : job_count
+UI -> User : Display "Found {N} companies"
+
+User -> UI : Review and de-select targets
+UI -> Service : finalize_targets(selected_ids)
+Service -> Store : update_targets(selected_ids)
+Store --> Service : success
+@enduml

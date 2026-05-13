@@ -1,0 +1,14 @@
+# Git ignore patterns
+__pycache__/
+.env
+data/applications/*
+!data/applications/.gitkeep
+logs/*.log
+node_modules/
+dist/
+.venv/
+*.pdf
+*.log
+.pytest_cache/
+MagicMock/
+test_output*.txt

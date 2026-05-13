@@ -1,0 +1,34 @@
+@startuml phase6_tracking
+' Component diagram: history.json → Dashboard React page → table of applications → user clicks company → loads cv.pdf + cover_letter.pdf → user manually updates status → history.json updated
+
+package "Frontend (React)" {
+    component [Dashboard]
+    component [ApplicationTable]
+    component [ArtifactViewer]
+    component [StatusUpdater]
+}
+
+package "Backend (FastAPI)" {
+    component [History Router]
+    component [Storage Service]
+}
+
+database "Local Storage" {
+    file "history.json"
+    folder "applications/" {
+        file "cv.pdf"
+        file "cover_letter.pdf"
+    }
+}
+
+[Dashboard] --> [ApplicationTable] : renders
+[History Router] --> [Storage Service] : calls
+[Storage Service] --> "history.json" : reads/writes
+[Dashboard] ..> [History Router] : fetch /api/history
+
+[ApplicationTable] --> [ArtifactViewer] : view(id)
+[ArtifactViewer] ..> "applications/" : load PDF
+
+[ApplicationTable] --> [StatusUpdater] : edit(id)
+[StatusUpdater] ..> [History Router] : PATCH /api/history
+@enduml

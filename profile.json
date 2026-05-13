@@ -1,0 +1,599 @@
+{
+  "meta": {
+    "version": "1.0",
+    "last_updated": "2026-05-04",
+    "purpose": "AutoApply platform source of truth — feeds CV generation, cover letter tailoring, and interview simulation",
+    "completeness_score": 78,
+    "missing_fields": ["phone", "email", "exact_education_dates", "gpa", "github_url", "portfolio_url"]
+  },
+
+  "personal_info": {
+    "first_name": "Zied",
+    "last_name": "Cherif",
+    "full_name": "Zied Cherif",
+    "headline": "Designer | Developer | Machine Learning Enthusiast",
+    "location": {
+      "city": "Sfax",
+      "region": "Sfax Governorate",
+      "country": "Tunisia",
+      "country_code": "TN",
+      "remote_open": true,
+      "relocation_open": true
+    },
+    "contact": {
+      "email": "czied30@gmail.com",
+      "phone": "+21624432602",
+      "linkedin": "https://www.linkedin.com/in/ziedcherif",
+      "github": "https://github.com/zcherif-coder",
+      "portfolio": "https://zcherif-coder.github.io",
+      "profile_picture": "https://media.licdn.com/dms/image/v2/D4D03AQFd_IJeYpiO0w/profile-displayphoto-shrink_800_800/B4DZUYIaZbHwAc-/0/1739866614476?e=1779321600&v=beta&t=hY7EdMkA0ze0G6BIRH2IXBqpeHbVD8SgIQA3o2CBuU8"
+    },
+    "languages": [
+      { "language": "Arabic", "proficiency": "Native", "code": "ar" },
+      { "language": "French", "proficiency": "Professional Working", "code": "fr" },
+      { "language": "English", "proficiency": "B2 Upper Intermediate", "code": "en", "certification": "EF SET 58/100" }
+    ],
+    "summary": "Front-end developer and machine learning enthusiast with hands-on experience in Flutter and cross-platform application development. Pursuing a degree at the Higher Institute of Industrial Management ISGIS while combining technical development with creative media production. Former intern at Djagora Foundation, co-founder of a marketing agency, and active contributor to student tech communities. Bridges the gap between aesthetics and engineering — equally comfortable writing production-grade code and crafting cinematic video content."
+  },
+
+  "education": [
+    {
+      "id": "edu_001",
+      "institution": "Institut International de Technologie",
+      "degree": "Engineer's Degree",
+      "field": "Computer Software Engineering",
+      "start_date": null,
+      "end_date": null,
+      "status": "completed_or_ongoing",
+      "grade": null,
+      "notable_projects": [],
+      "location": "Tunisia"
+    },
+    {
+      "id": "edu_002",
+      "institution": "Higher Institute of Industrial Management — ISGIS",
+      "degree": "Licentiate Degree",
+      "field": "Business Intelligence / Industrial Management",
+      "start_date": "2022",
+      "end_date": null,
+      "status": "completed",
+      "grade": null,
+      "extracurricular": "Media Head at Google Students Club ISGIS",
+      "notable_coursework": [
+        "Business Model Canvas (BMC)",
+        "Design Thinking (5 steps methodology)",
+        "Linear Programming (Simplex method)",
+        "Algorithms and Optimization",
+        "Linux (shell, awk, bash)",
+        "Entrepreneurship"
+      ],
+      "location": "Sfax, Tunisia"
+    },
+    {
+      "id": "edu_003",
+      "institution": "Institut Supérieur de Gestion Industrielle de Sfax",
+      "degree": "Licentiate Degree",
+      "field": "Industrial Management",
+      "start_date": null,
+      "end_date": null,
+      "status": "completed",
+      "grade": null,
+      "location": "Sfax, Tunisia"
+    }
+  ],
+
+  "work_experience": [
+    {
+      "id": "exp_001",
+      "company": "Future Proof",
+      "company_website": "futureproof.tn",
+      "company_linkedin": "https://www.linkedin.com/company/future-proof-sarl",
+      "company_size": "11-50",
+      "company_industry": "Information Technology and Services",
+      "title": "Full Stack Developer",
+      "employment_type": "Full-time",
+      "start_date": "2025-07",
+      "end_date": null,
+      "is_current": true,
+      "duration": "6 months",
+      "location": "Sfax, Tunisia",
+      "location_type": "on-site",
+      "responsibilities": [
+        "Developed a Flutter mobile application focused on booking system optimization",
+        "Identified and resolved performance bottlenecks in booking flows by restructuring backend call logic",
+        "Reduced unnecessary API/service calls through early-return optimization patterns",
+        "Managed Git workflows including branching, rebasing, stashing, and cherry-picking across feature branches",
+        "Collaborated on frontend Angular interface for an interactive medicine redistribution platform",
+        "Worked with microservices architecture using Spring Boot, Kubernetes, and Docker",
+        "Participated in feature development and bug fixing cycles in a real-world production environment",
+        "Contributed to the Donate2Heal platform — connecting surplus medicine donors to people in need"
+      ],
+      "tech_stack": ["Flutter", "Dart", "Angular", "Spring Boot", "PostgreSQL", "Docker", "Kubernetes", "Helm", "Git"],
+      "achievements": [
+        "Improved booking experience performance by restructuring inefficient service call chains",
+        "Contributed to a scalable microservices architecture deployed via Kubernetes"
+      ]
+    },
+    {
+      "id": "exp_002",
+      "company": "Djagora Foundation",
+      "company_linkedin": "https://www.linkedin.com/company/djagora-foundation/",
+      "company_size": null,
+      "company_industry": "Non-profit / Community Development",
+      "title": "Project Intern",
+      "employment_type": "Internship",
+      "start_date": null,
+      "end_date": null,
+      "is_current": false,
+      "duration": null,
+      "location": "Tunisia",
+      "location_type": "on-site",
+      "responsibilities": [
+        "Developed the iPerson project — an intelligent application for monitoring and analyzing user habits",
+        "Implemented machine learning models (ANN, Random Forest) for emotion detection and activity classification",
+        "Integrated NLP tokenizers including BERT, Word2Vec, TF-IDF, and GPT Tokenizer",
+        "Built real-time behavior tracking capturing click patterns, typing speed, and mouse movement",
+        "Developed a recommendation system using cosine similarity for music, films, and break suggestions",
+        "Integrated Llama 2 for natural language user interaction within the application",
+        "Used Python with CSV-based data pipelines and Tkinter/Kivy for interface layers"
+      ],
+      "tech_stack": ["Python", "Machine Learning", "ANN", "Random Forest", "BERT", "NLP", "Llama 2", "Tkinter", "Kivy", "CSV"],
+      "achievements": [
+        "Built an end-to-end AI system combining emotion recognition, behavior tracking, and personalized recommendations",
+        "Integrated multiple ML paradigms (classification, NLP, recommendation) in a single cohesive application"
+      ]
+    },
+    {
+      "id": "exp_003",
+      "company": "Interacti Agency",
+      "company_linkedin": "https://www.linkedin.com/company/interactiagency/",
+      "company_size": null,
+      "company_industry": "Marketing and Advertising",
+      "title": "Co-Founder",
+      "employment_type": "Founder",
+      "start_date": null,
+      "end_date": null,
+      "is_current": false,
+      "duration": null,
+      "location": "Sfax, Tunisia",
+      "location_type": "hybrid",
+      "responsibilities": [
+        "Co-founded a creative marketing agency offering design, video, and web services",
+        "Led client acquisition and account management for travel, e-commerce, and local business clients",
+        "Delivered branding, visual identity, and UI/UX design for multiple clients",
+        "Produced video content including shooting, editing, and motion graphics",
+        "Managed cross-functional delivery across development, design, and media production"
+      ],
+      "tech_stack": ["Adobe Premiere Pro", "After Effects", "Illustrator", "Photoshop", "Figma", "React", "HTML", "CSS"],
+      "achievements": [
+        "Successfully co-founded and operated a multi-service digital agency",
+        "Delivered projects across multiple industries simultaneously as a student"
+      ]
+    },
+    {
+      "id": "exp_004",
+      "company": "SOS Villages d'Enfants en Tunisie",
+      "company_linkedin": "https://www.linkedin.com/company/sos-villages-d-enfants-en-tunisie/",
+      "title": "Freelance Video Editor",
+      "employment_type": "Freelance",
+      "start_date": null,
+      "end_date": null,
+      "is_current": false,
+      "location": "Sfax, Tunisia",
+      "responsibilities": [
+        "Produced and edited video content for an NGO focused on children's welfare",
+        "Created visual storytelling assets for social media and campaigns"
+      ],
+      "tech_stack": ["Adobe Premiere Pro", "After Effects"]
+    },
+    {
+      "id": "exp_005",
+      "company": "IDER Club ISGIS",
+      "company_linkedin": "https://www.linkedin.com/company/ider-club-isgis/",
+      "title": "Freelance Video Editor",
+      "employment_type": "Freelance",
+      "start_date": null,
+      "end_date": null,
+      "is_current": false,
+      "location": "Sfax, Tunisia",
+      "responsibilities": [
+        "Created promotional and event video content for the university entrepreneurship club",
+        "Delivered edited video assets for club events and communications"
+      ],
+      "tech_stack": ["Adobe Premiere Pro", "After Effects"]
+    },
+    {
+      "id": "exp_006",
+      "company": "Need to Travel",
+      "company_linkedin": "https://www.linkedin.com/company/need-to-travel/",
+      "title": "Video Editor",
+      "employment_type": "Freelance",
+      "start_date": null,
+      "end_date": null,
+      "is_current": false,
+      "location": "Sfax, Tunisia",
+      "responsibilities": [
+        "Edited travel content and promotional videos for a travel agency",
+        "Delivered social media-optimized video assets"
+      ],
+      "tech_stack": ["Adobe Premiere Pro", "After Effects"]
+    },
+    {
+      "id": "exp_007",
+      "company": "Independent / Self-Initiated",
+      "title": "Frontend Web Developer",
+      "employment_type": "Freelance",
+      "start_date": "2023",
+      "end_date": null,
+      "is_current": true,
+      "location": "Remote",
+      "responsibilities": [
+        "Developed responsive front-end interfaces for clients in travel and e-commerce sectors",
+        "Built a fully animated personal portfolio using React, Vite, SCSS, Framer Motion, and GSAP",
+        "Designed UI/UX prototypes in Figma before implementation",
+        "Deployed projects via GitHub Pages",
+        "Integrated EmailJS for contact form functionality",
+        "Built web scraping systems using Selenium and BeautifulSoup for lead generation targeting local businesses",
+        "Experimented with AI-integrated Streamlit apps for image recognition"
+      ],
+      "tech_stack": ["React", "Vite", "SCSS", "Framer Motion", "GSAP", "Figma", "HTML", "CSS", "JS", "EmailJS", "Python", "Selenium", "BeautifulSoup", "Streamlit"],
+      "achievements": [
+        "Built and deployed a fully animated React portfolio showcasing design and development skills",
+        "Created a functional lead generation scraper extracting business contacts across Tunisia"
+      ]
+    }
+  ],
+
+  "volunteer_experience": [
+    {
+      "id": "vol_001",
+      "organization": "Microsoft Tech Club ISGIS",
+      "role": "Media Specialist",
+      "start_date": "2023-10",
+      "end_date": null,
+      "is_current": true,
+      "duration": "2+ years",
+      "responsibilities": [
+        "Created media content (videos, visuals) for club events and communications",
+        "Contributed to integration day planning and member engagement strategy",
+        "Collaborated in tech and community activities"
+      ]
+    },
+    {
+      "id": "vol_002",
+      "organization": "Google Students Club ISGIS",
+      "role": "Media Manager",
+      "start_date": "2024-01",
+      "end_date": null,
+      "is_current": true,
+      "duration": "2 years",
+      "responsibilities": [
+        "Managed all media output for the Google Students Club at ISGIS",
+        "Produced visual and video content for events and online presence"
+      ]
+    },
+    {
+      "id": "vol_003",
+      "organization": "JCI Gremda",
+      "role": "Media Assistant",
+      "start_date": "2022-08",
+      "end_date": "2024-02",
+      "duration": "1 year 6 months",
+      "responsibilities": [
+        "Assisted media production for a junior chamber of commerce",
+        "Created event coverage content and promotional visuals"
+      ]
+    },
+    {
+      "id": "vol_004",
+      "organization": "Tunivisions Foundation",
+      "role": "Video Editor",
+      "start_date": "2021-09",
+      "end_date": "2022-07",
+      "duration": "10 months",
+      "responsibilities": [
+        "Edited video content for a media foundation",
+        "Produced visual storytelling assets for campaigns"
+      ]
+    }
+  ],
+
+  "skills": {
+    "programming_languages": [
+      { "name": "JavaScript", "level": "Advanced" },
+      { "name": "TypeScript", "level": "Intermediate" },
+      { "name": "Python", "level": "Intermediate" },
+      { "name": "Dart", "level": "Intermediate" },
+      { "name": "Java", "level": "Beginner-Intermediate", "note": "reading/debugging level" },
+      { "name": "HTML/CSS", "level": "Advanced" }
+    ],
+    "frameworks_and_libraries": [
+      { "name": "React", "level": "Advanced" },
+      { "name": "Angular", "level": "Intermediate" },
+      { "name": "Flutter", "level": "Intermediate" },
+      { "name": "Spring Boot", "level": "Intermediate" },
+      { "name": "Node.js", "level": "Intermediate" },
+      { "name": "Framer Motion", "level": "Intermediate" },
+      { "name": "GSAP", "level": "Intermediate" },
+      { "name": "SCSS/Sass", "level": "Advanced" },
+      { "name": "Streamlit", "level": "Beginner" },
+      { "name": "Tkinter", "level": "Beginner" },
+      { "name": "Kivy", "level": "Beginner" }
+    ],
+    "ai_and_ml": [
+      { "name": "Machine Learning", "level": "Intermediate" },
+      { "name": "Deep Learning / ANN", "level": "Intermediate" },
+      { "name": "Natural Language Processing", "level": "Intermediate" },
+      { "name": "BERT / Word2Vec / TF-IDF", "level": "Intermediate" },
+      { "name": "Llama 2", "level": "Intermediate" },
+      { "name": "Groq API", "level": "Intermediate" },
+      { "name": "Prompt Engineering", "level": "Advanced" },
+      { "name": "Seaborn", "level": "Beginner" },
+      { "name": "Emotion Detection Systems", "level": "Intermediate" }
+    ],
+    "devops_and_infrastructure": [
+      { "name": "Docker", "level": "Intermediate" },
+      { "name": "Kubernetes", "level": "Intermediate" },
+      { "name": "Helm", "level": "Beginner" },
+      { "name": "Git / GitHub", "level": "Advanced" },
+      { "name": "GitHub Pages", "level": "Advanced" },
+      { "name": "CI/CD (Jenkins / GitLab CI)", "level": "Beginner" }
+    ],
+    "databases": [
+      { "name": "PostgreSQL", "level": "Intermediate" },
+      { "name": "MongoDB", "level": "Beginner" },
+      { "name": "MySQL / XAMPP", "level": "Beginner" },
+      { "name": "CSV data handling", "level": "Intermediate" }
+    ],
+    "design_and_creative": [
+      { "name": "Adobe Premiere Pro", "level": "Advanced", "years": 3 },
+      { "name": "Adobe After Effects", "level": "Advanced" },
+      { "name": "Adobe Illustrator", "level": "Intermediate" },
+      { "name": "Adobe Photoshop", "level": "Intermediate" },
+      { "name": "Figma", "level": "Advanced" },
+      { "name": "UI/UX Design", "level": "Advanced" },
+      { "name": "Motion Graphics", "level": "Intermediate" },
+      { "name": "3D Animation", "level": "Beginner-Intermediate" },
+      { "name": "Video Editing", "level": "Advanced" }
+    ],
+    "web_scraping_and_automation": [
+      { "name": "Selenium", "level": "Intermediate" },
+      { "name": "BeautifulSoup", "level": "Intermediate" },
+      { "name": "Playwright", "level": "Beginner" },
+      { "name": "Apify", "level": "Beginner" }
+    ],
+    "tools": [
+      { "name": "VS Code", "level": "Advanced" },
+      { "name": "Git LFS", "level": "Intermediate" },
+      { "name": "Anaconda", "level": "Intermediate" },
+      { "name": "pgAdmin", "level": "Beginner" },
+      { "name": "EmailJS", "level": "Intermediate" },
+      { "name": "Vite", "level": "Advanced" }
+    ],
+    "soft_skills": [
+      "Creativity",
+      "Problem-solving",
+      "Adaptability",
+      "Multilingual communication",
+      "Initiative and ownership",
+      "Iterative thinking",
+      "Visual storytelling",
+      "Client-facing communication",
+      "Team collaboration",
+      "Self-directed learning",
+      "Systems thinking",
+      "Optimization mindset",
+      "Pitching ideas",
+      "Project management"
+    ],
+    "domain_expertise": [
+      "Front-end development",
+      "UI/UX design",
+      "Creative media production",
+      "AI-integrated applications",
+      "Microservices architecture",
+      "Cross-platform mobile development",
+      "Lead generation systems",
+      "Community engagement and media management"
+    ]
+  },
+
+  "projects": [
+    {
+      "id": "proj_001",
+      "name": "Personal Portfolio Website",
+      "type": "Personal Branding",
+      "description": "Fully animated interactive portfolio featuring parallax scrolling, motion-rich sections, and SVG loading animations. Showcases development and design skills.",
+      "tech_stack": ["React", "Vite", "SCSS", "Framer Motion", "GSAP", "GitHub Pages"],
+      "role": "Full Developer & Designer",
+      "status": "Live",
+      "outcome": "Personal brand asset shared on LinkedIn and used for client outreach",
+      "url": "https://zcherif-coder.github.io"
+    },
+    {
+      "id": "proj_002",
+      "name": "iPerson — Intelligent Habit Monitoring System",
+      "type": "AI / ML",
+      "description": "Advanced application developed during Djagora Foundation internship. Monitors user habits on computers by tracking clicks, mouse movements, and typing speed. Detects emotions through AI-driven analysis and provides personalized recommendations for music, films, or breaks.",
+      "tech_stack": ["Python", "ANN", "Random Forest", "BERT", "Word2Vec", "TF-IDF", "GPT Tokenizer", "Llama 2", "Cosine Similarity", "Tkinter", "Kivy", "CSV"],
+      "role": "Full Developer",
+      "status": "Completed / Experimental",
+      "outcome": "End-to-end AI system combining behavior tracking, emotion recognition, and recommendation engine"
+    },
+    {
+      "id": "proj_003",
+      "name": "Donate2Heal — Medicine Redistribution Platform",
+      "type": "Full-Stack / Social Impact",
+      "description": "Interactive platform connecting donors of unused medications with people in need. Built with microservices architecture, AI-powered matching, and secure authentication during internship at Future Proof.",
+      "tech_stack": ["Angular", "Spring Boot", "Spring AI", "PostgreSQL", "Docker", "Kubernetes", "Helm", "GitLab CI"],
+      "role": "Full-Stack Developer (Intern)",
+      "status": "In Development",
+      "outcome": "Scalable microservices platform with AI matching algorithm and real-time donation tracking"
+    },
+    {
+      "id": "proj_004",
+      "name": "Lead Generation Scraper",
+      "type": "Automation / Data",
+      "description": "Automated web scraping system targeting barbershops, salons, and beauty centers in Tunisia. Extracts phone numbers, addresses, and social media profiles using multi-engine search rotation.",
+      "tech_stack": ["Python", "Selenium", "BeautifulSoup", "CSV"],
+      "role": "Full Developer",
+      "status": "Completed",
+      "outcome": "Structured CSV outputs used for client outreach and marketing campaigns"
+    },
+    {
+      "id": "proj_005",
+      "name": "Container House Startup",
+      "type": "Entrepreneurship",
+      "description": "Eco-friendly housing startup concept aligned with UN Sustainable Development Goals. Included landing page design, branding, and business positioning.",
+      "tech_stack": ["React", "Figma", "Adobe Illustrator"],
+      "role": "Founder / Designer / Developer",
+      "status": "Concept stage"
+    },
+    {
+      "id": "proj_006",
+      "name": "AutoApply Platform",
+      "type": "AI / Automation",
+      "description": "Currently building an AI-powered automated job application platform. Scrapes LinkedIn for job listings, generates custom CVs and cover letters tailored per company using GAN-style scoring loops, and includes an interview simulator that acts as the target company's HR persona.",
+      "tech_stack": ["React", "FastAPI", "Python", "Groq Llama 3.3 70b", "Playwright", "Apify", "MySQL", "Brevo SMTP"],
+      "role": "Sole Developer & Architect",
+      "status": "In Development"
+    }
+  ],
+
+  "certifications": [
+    {
+      "id": "cert_001",
+      "name": "Attendance — Hashgraph Developer",
+      "issuer": "The Hashgraph Association",
+      "issued_date": "2024-12",
+      "type": "Blockchain / Distributed Ledger"
+    },
+    {
+      "id": "cert_002",
+      "name": "Certificate of Completion — Intro to AI",
+      "issuer": "365 Data Science",
+      "issued_date": "2024-11",
+      "type": "Artificial Intelligence"
+    },
+    {
+      "id": "cert_003",
+      "name": "Certificate of Completion — Introduction to Data and Data Science",
+      "issuer": "365 Data Science",
+      "issued_date": "2024-11",
+      "type": "Data Science"
+    },
+    {
+      "id": "cert_004",
+      "name": "EF SET English Certificate — B2 Upper Intermediate (58/100)",
+      "issuer": "EF Standard English Test (EF SET)",
+      "issued_date": "2024-10",
+      "type": "Language"
+    },
+    {
+      "id": "cert_005",
+      "name": "General English",
+      "issuer": "Dreams N Motion",
+      "issued_date": "2024-06",
+      "type": "Language"
+    },
+    {
+      "id": "cert_006",
+      "name": "Certificate of Completion",
+      "issuer": "AIESEC Sfax",
+      "issued_date": "2024-04",
+      "type": "Leadership / Exchange Program"
+    },
+    {
+      "id": "cert_007",
+      "name": "Attestation de Réussite",
+      "issuer": "SOS Villages d'Enfants en Tunisie",
+      "issued_date": "2023-01",
+      "type": "Volunteer / NGO"
+    },
+    {
+      "id": "cert_008",
+      "name": "Introduction to Ethical Hacking and IoT Cybersecurity / IoT Equipment Penetration Test",
+      "issuer": "IT-CyberSec Expert",
+      "issued_date": "2022-12",
+      "type": "Cybersecurity"
+    }
+  ],
+
+  "personality_and_work_style": {
+    "summary": "Builder-creator with a rare hybrid profile spanning software development, AI integration, and creative media production. Highly iterative and optimization-driven. Learns by doing and ships working products, not just prototypes.",
+    "communication_style": "Direct, concise, sometimes informal. Prefers actionable outputs over theory. Multilingual — switches fluidly between English, French, and Arabic.",
+    "work_traits": [
+      "Hands-on learner — builds to understand",
+      "Iterative and detail-oriented — constantly refining",
+      "Fast-moving — jumps into execution quickly",
+      "Optimization-obsessed — always looks for efficiency gains",
+      "Persistent debugger — works through problems systematically",
+      "Multi-disciplinary — equally at home in code, design, and video"
+    ],
+    "values": [
+      "Aesthetic quality combined with technical performance",
+      "Creative freedom and ownership",
+      "Impactful, real-world projects over academic exercises",
+      "Innovation and standing out from the crowd"
+    ],
+    "under_pressure": "Stays focused, breaks problems into components, seeks quick wins while maintaining quality",
+    "leadership_style": "Visionary and self-directed. Takes full ownership of projects. Idea generator who bridges technical execution with product thinking.",
+    "unique_traits": [
+      "Bridges creative (video/design) and technical (dev/AI) worlds — rare combination",
+      "Built multiple real client-facing products as a student",
+      "Has genuine AI/ML implementation experience, not just theoretical knowledge",
+      "Competitive calisthenics training reflects discipline and consistency",
+      "Entrepreneurial mindset — co-founded an agency and has active startup ideas"
+    ]
+  },
+
+  "preferences_and_goals": {
+    "target_roles": [
+      "Frontend Developer",
+      "Full-Stack Developer",
+      "Flutter Developer",
+      "UI/UX Developer",
+      "AI/ML Engineer",
+      "Creative Technologist",
+      "React Developer"
+    ],
+    "target_industries": [
+      "Software Development",
+      "AI and Machine Learning",
+      "Creative Technology",
+      "Startups and Innovation",
+      "Digital Marketing Tech",
+      "EdTech",
+      "HealthTech"
+    ],
+    "work_style_preference": ["Remote", "Hybrid", "Freelance", "Project-based"],
+    "employment_type_preference": ["Full-time", "Contract", "Freelance"],
+    "career_direction": "Evolving toward AI-integrated full-stack engineering and technical product leadership. Long-term goal: CTO or Lead Engineer at a tech startup.",
+    "dealbreakers": ["Purely administrative roles with no technical component", "Zero creative latitude"],
+    "salary_expectations": null,
+    "open_to_relocation": true,
+    "dream_role": "Technical co-founder or Lead Engineer at an AI-driven startup"
+  },
+
+  "cv_generation_hints": {
+    "tone": "Confident, specific, achievement-focused. Avoid generic buzzwords. Lead with concrete outcomes.",
+    "structure_order": ["education", "experience", "projects", "skills", "certifications", "volunteer"],
+    "cv_length": "1 page",
+    "education_position": "top",
+    "soft_skills_position": "bottom",
+    "strengths_to_highlight": [
+      "Rare hybrid: Developer + Designer + AI Engineer in one",
+      "Real production experience (not just academic projects)",
+      "Entrepreneurial track record (co-founded agency, built startup concepts)",
+      "AI/ML hands-on implementation (iPerson project with Llama 2, ANN, BERT)",
+      "Microservices + DevOps exposure early in career",
+      "Active community leadership (Microsoft Tech Club, Google Students Club)"
+    ],
+    "keywords_for_ats": [
+      "React", "Flutter", "Angular", "Spring Boot", "Python", "Machine Learning",
+      "Docker", "Kubernetes", "PostgreSQL", "UI/UX", "Figma", "TypeScript",
+      "Node.js", "REST API", "Microservices", "CI/CD", "Deep Learning", "NLP",
+      "Front-end Developer", "Full-Stack Developer", "AI Engineer"
+    ]
+  }
+}

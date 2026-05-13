@@ -1,0 +1,29 @@
+@startuml phase7_interview
+' State diagram: User selects company (status=interview) → load meta.json persona → Groq system prompt built → Interview chat starts → [user sends message] → Groq responds as HR/CEO → [Help Me clicked] → Groq pauses, returns coaching tip → [End session] → Groq scores 0-10 → save to interview_sessions/{id}/{session_id}.json → [Retry/Reset available]
+
+[*] --> Setup
+Setup : Load company persona
+Setup : Build system prompt (HR/CEO)
+
+Setup --> Chatting : start_session()
+
+state Chatting {
+    [*] --> AI_Turn
+    AI_Turn : AI asks question
+    AI_Turn --> User_Turn : wait_for_input
+    
+    User_Turn --> AI_Turn : send_message()
+    User_Turn --> HelpRequested : click_help()
+    
+    HelpRequested --> User_Turn : show_coaching_tip()
+}
+
+Chatting --> Scoring : end_session()
+Scoring : Groq scores performance (0-10)
+Scoring : Save session to JSON
+
+Scoring --> FinalState
+FinalState : Display results
+FinalState --> Setup : retry()
+FinalState --> [*] : exit()
+@enduml

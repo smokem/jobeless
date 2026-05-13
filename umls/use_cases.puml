@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor "Job Seeker" as js
+package "AutoApply System" {
+  usecase "Optimize Profile Base" as UC1
+  usecase "Discover AI-Matched Jobs" as UC2
+  usecase "Generate CV/CL (GAN Loop)" as UC3
+  usecase "Auto-Apply via Headless/Email" as UC4
+  usecase "Simulate Roleplayed Interview" as UC5
+}
+
+js --> UC1
+js --> UC2
+js --> UC3
+js --> UC4
+js --> UC5
+@enduml

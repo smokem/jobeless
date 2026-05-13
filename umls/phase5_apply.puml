@@ -1,0 +1,32 @@
+@startuml phase5_apply
+' Decision flowchart: For each target → apply_type? → easy_apply: Playwright automates LinkedIn → email: Brevo sends email + Playwright sends LinkedIn DM → update history.json status=sent → rate limit check → next target
+
+start
+
+:Select pending targets from targets.json;
+
+repeat
+    :Get next target;
+    if (Apply Type?) then (easy_apply)
+        :Playwright: Login to LinkedIn;
+        :Playwright: Navigate to job_url;
+        :Playwright: Fill form & Upload CV;
+        :Playwright: Submit Application;
+    else (email)
+        :Brevo: Generate & Send Email;
+        :Playwright: Send LinkedIn DM to HR (Optional);
+    endif
+    
+    :Update history.json (status=sent, timestamp);
+    :Save sent artifacts in applications/{id}/;
+    
+    if (Rate limit reached?) then (yes)
+        :Pause Queue;
+        stop
+    else (no)
+        :Wait random delay (2-8s);
+    endif
+repeat while (More targets?) is (yes)
+
+stop
+@enduml

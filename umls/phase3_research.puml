@@ -1,0 +1,23 @@
+@startuml phase3_research
+' Sequence diagram: For each target in targets.json → Apify scrapes company LinkedIn → Apify scrapes CEO LinkedIn posts → Apify scrapes HR LinkedIn posts → all raw data sent to Groq → Groq synthesizes hiring persona → persona saved to applications/{id}/meta.json
+
+participant "Research Service" as Service
+participant "Apify Service" as Apify
+participant "Groq Service" as Groq
+database "JSON Store" as Store
+
+loop for each target in targets.json
+    Service -> Apify : scrape_company_linkedin(company_url)
+    Apify --> Service : company_data
+    Service -> Apify : scrape_ceo_posts(ceo_url)
+    Apify --> Service : ceo_posts
+    Service -> Apify : scrape_hr_posts(hr_url)
+    Apify --> Service : hr_posts
+    
+    Service -> Groq : synthesize_persona(company_data, ceo_posts, hr_posts)
+    Groq --> Service : hiring_persona_json
+    
+    Service -> Store : write_atomic("applications/{id}/meta.json", hiring_persona_json)
+    Store --> Service : success
+end
+@enduml

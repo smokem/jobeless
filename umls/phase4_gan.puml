@@ -1,0 +1,34 @@
+@startuml phase4_gan
+' State diagram: profile.json + persona → Groq B generates CV JSON → Groq A scores as HR persona → score ≥ 9? → YES: render PDF, save, exit loop → NO: iteration < 5? → YES: pass notes to Groq B, regenerate → NO: save best result, log warning, exit loop
+
+[*] --> Init
+Init : Load profile.json
+Init : Load persona from meta.json
+
+state "GAN Loop" as Loop {
+    state "Generate (Groq B)" as Generate
+    state "Score (Groq A)" as Score
+    
+    [*] --> Generate
+    Generate --> Score : draft_cv
+    Score --> Decision : evaluation
+    
+    state "Decision" as Decision <<choice>>
+    Decision --> ExitSuccess : score >= 9
+    Decision --> CheckIter : score < 9
+    
+    state "Check Iterations" as CheckIter <<choice>>
+    CheckIter --> Generate : iter < 5 [notes included]
+    CheckIter --> ExitFailure : iter == 5
+}
+
+ExitSuccess --> RenderPDF : best_draft
+ExitFailure --> RenderPDF : best_draft_so_far
+ExitFailure : log_warning("Target score not reached")
+
+RenderPDF --> SaveArtifacts
+SaveArtifacts --> [*]
+
+ExitSuccess : status="PASSED"
+ExitFailure : status="FAILED"
+@enduml

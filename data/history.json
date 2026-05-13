@@ -1,0 +1,110 @@
+[
+  {
+    "company_id": "tgt_1777922092_0_mock",
+    "company_name": "TechCorp Innovations",
+    "job_title": "Senior Frontend",
+    "date_sent": "2026-05-08T04:09:29.795717",
+    "apply_method": "easy_apply",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_0_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "Easy Apply button not found"
+  },
+  {
+    "company_id": "tgt_1777922092_2_mock",
+    "company_name": "StartupX",
+    "job_title": "Lead Frontend",
+    "date_sent": "2026-05-08T04:09:54.500843",
+    "apply_method": "easy_apply",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_2_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "Easy Apply button not found"
+  },
+  {
+    "company_id": "tgt_1777922092_0_mock",
+    "company_name": "TechCorp Innovations",
+    "job_title": "Senior Frontend",
+    "date_sent": "2026-05-08T04:18:10.057550",
+    "apply_method": "easy_apply",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_0_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "Timeout 30000ms exceeded."
+  },
+  {
+    "company_id": "tgt_1777922092_2_mock",
+    "company_name": "StartupX",
+    "job_title": "Lead Frontend",
+    "date_sent": "2026-05-08T04:18:47.183649",
+    "apply_method": "easy_apply",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_2_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "Timeout 30000ms exceeded."
+  },
+  {
+    "company_id": "tgt_1777922092_1_mock",
+    "company_name": "Global Systems Solutions",
+    "job_title": "Frontend Engineer",
+    "date_sent": "2026-05-08T04:41:32.076387",
+    "apply_method": "external",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_1_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "Unknown apply type"
+  },
+  {
+    "company_id": "tgt_1777922092_0_mock",
+    "company_name": "TechCorp Innovations",
+    "job_title": "Senior Frontend",
+    "date_sent": "2026-05-08T04:42:45.885187",
+    "apply_method": "easy_apply",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_0_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "invalid state"
+  },
+  {
+    "company_id": "tgt_1777922092_1_mock",
+    "company_name": "Global Systems Solutions",
+    "job_title": "Frontend Engineer",
+    "date_sent": "2026-05-08T04:43:03.169730",
+    "apply_method": "external",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_1_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "Unknown apply type"
+  },
+  {
+    "company_id": "tgt_1777922092_2_mock",
+    "company_name": "StartupX",
+    "job_title": "Lead Frontend",
+    "date_sent": "2026-05-08T04:43:38.236835",
+    "apply_method": "easy_apply",
+    "cv_score_achieved": 9.0,
+    "status": "rejected",
+    "cv_path": "data\\applications\\tgt_1777922092_2_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": "Easy Apply button not found"
+  },
+  {
+    "company_id": "tgt_1777922092_0_mock",
+    "company_name": "TechCorp Innovations",
+    "job_title": "Senior Frontend",
+    "date_sent": "2026-05-08T04:46:57.295349",
+    "apply_method": "easy_apply",
+    "cv_score_achieved": 9.0,
+    "status": "sent",
+    "cv_path": "data\\applications\\tgt_1777922092_0_mock\\cv.pdf",
+    "cl_path": "",
+    "notes": null
+  }
+]

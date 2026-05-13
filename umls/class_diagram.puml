@@ -1,0 +1,53 @@
+@startuml
+class TargetCompany {
+  +company_id: str
+  +company_name: str
+  +job_title: str
+  +job_url: HttpUrl
+  +apply_type: str
+  +status: str
+}
+
+class ProfileMeta {
+  +personal_info: PersonalInfo
+  +education: dict
+  +work_experience: list
+  +skills: dict
+}
+
+class ApplicationHistory {
+  +company_id: str
+  +company_name: str
+  +date_sent: datetime
+  +status: str
+}
+
+class InterviewSession {
+  +session_id: str
+  +company_id: str
+  +messages: list
+  +performance_score: float
+}
+
+class JsonStore {
+  +read_profile(): ProfileMeta
+  +write_history(data)
+  +read_targets(): list
+}
+
+class GroqService {
+  +call_groq(prompt): str
+  +log_decision()
+}
+
+class AutoApplyOrchestrator {
+  +run_gan_loop(target)
+  +easy_apply(target)
+  +send_email(target)
+}
+
+AutoApplyOrchestrator --> TargetCompany
+AutoApplyOrchestrator --> ProfileMeta
+AutoApplyOrchestrator --> JsonStore
+AutoApplyOrchestrator --> GroqService
+@enduml

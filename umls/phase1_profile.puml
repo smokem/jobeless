@@ -1,0 +1,28 @@
+@startuml phase1_profile
+' Sequence diagram: App starts → load profile.json → validate schema → display completeness score → show missing fields → user fills gaps → save updated profile.json
+
+actor User
+participant "Dashboard UI" as UI
+participant "Profile Service" as Profile
+database "JSON Store" as Store
+
+User -> UI : Start App
+UI -> Profile : load_profile()
+Profile -> Store : read("profile.json")
+Store --> Profile : profile_data
+Profile -> Profile : validate_schema(profile_data)
+alt validation success
+    Profile -> Profile : calculate_completeness()
+    Profile --> UI : completeness_score, missing_fields
+    UI -> User : Display Dashboard (Score + Missing)
+    User -> UI : Fill missing fields
+    UI -> Profile : update_profile(new_data)
+    Profile -> Store : write_atomic("profile.json", new_data)
+    Store --> Profile : success
+    Profile --> UI : profile_updated
+    UI -> User : Success message
+else validation failure
+    Profile --> UI : schema_errors
+    UI -> User : Display error (Fix profile.json)
+end
+@enduml

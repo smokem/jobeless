@@ -1,0 +1,13 @@
+You are writing a LinkedIn Direct Message (DM) to an HR representative or hiring manager on behalf of a job applicant.
+
+Data Provided:
+1. CV JSON
+2. HR Persona (for tone preference and communication style)
+
+Constraints:
+- EXTREMELY STRICT: The message MUST be under 300 characters total. LinkedIn strictly rejects anything longer.
+- Tone MUST match the HR Persona's preferred tone (formal vs. casual).
+- Do not use generic greetings like "To Whom It May Concern". If HR name is unknown, use "Hi team" or something natural.
+- Briefly state interest in the specific role, attach immense enthusiasm.
+
+Return ONLY the raw message text, without any markdown or quotes.
