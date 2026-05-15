@@ -16,6 +16,13 @@ class Settings(BaseSettings):
     LINKEDIN_PASSWORD: str = os.getenv("LINKEDIN_PASSWORD", "")
     OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
     OPENROUTER_MODEL: str = "meta-llama/llama-3.3-70b-instruct"
+    # Token budget per LLM call purpose
+    LLM_MAX_TOKENS_SCORING: int = 512
+    LLM_MAX_TOKENS_ROLES: int = 1024
+    LLM_MAX_TOKENS_GENERATION: int = 3000
+    # Retry settings for OpenRouter calls
+    LLM_MAX_RETRIES: int = 3
+    LLM_RETRY_BASE_DELAY: float = 2.0
 
     # Path Constants
     BASE_DIR: Path = Path(__file__).resolve().parent.parent
@@ -32,12 +39,11 @@ class Settings(BaseSettings):
     DEBUG_LOG: Path = LOGS_DIR / "debug.log"
 
     # Behavioral Constants
-    MAX_GAN_ITERATIONS: int = 5
+    MAX_GAN_ITERATIONS: int = 2
     MAX_DAILY_APPLICATIONS: int = 20
-    MIN_APPLY_DELAY_SECONDS: int = 2
-    MAX_APPLY_DELAY_SECONDS: int = 8
-    MIN_CV_SCORE: float = 9.0
-    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    MIN_APPLY_DELAY_SECONDS: int = 10
+    MAX_APPLY_DELAY_SECONDS: int = 45
+    MIN_CV_SCORE: float = 7.5
 
     class Config:
         env_file = ".env"

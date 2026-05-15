@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, MapPin, Briefcase, Sparkles, X, Check, AlertCircle } from 'lucide-react';
+import { User, MapPin, Briefcase, Sparkles, X, Check, AlertCircle, RefreshCw } from 'lucide-react';
 
 /**
  * ProfileCard — Reusable component displaying profile overview with
@@ -12,10 +12,17 @@ import { User, MapPin, Briefcase, Sparkles, X, Check, AlertCircle } from 'lucide
  *   onUpdate      — async (updates) => void — called to PATCH profile
  *   loading       — boolean
  */
-const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, loading }) => {
+const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, onRefresh, loading }) => {
   const [editingField, setEditingField] = useState(null);
   const [editValue, setEditValue] = useState('');
   const [saving, setSaving] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = async () => {
+    if (!onRefresh || refreshing) return;
+    setRefreshing(true);
+    try { await onRefresh(); } finally { setRefreshing(false); }
+  };
 
   if (loading) {
     return (
@@ -63,25 +70,36 @@ const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, load
     headline: { path: 'personal_info.headline', label: 'Headline', placeholder: 'e.g. Full-Stack Developer' },
     summary: { path: 'personal_info.summary', label: 'Summary', placeholder: 'Brief professional summary...' },
     location_city: { path: 'personal_info.location.city', label: 'City', placeholder: 'e.g. San Francisco' },
-    languages: { path: 'personal_info.languages', label: 'Languages', placeholder: 'Cannot edit inline' },
+    languages: { path: 'personal_info.languages', label: 'Languages', placeholder: '[\n  { "language": "English", "proficiency": "Fluent" }\n]', isJson: true, type: 'textarea' },
     full_name: { path: 'personal_info.full_name', label: 'Full Name', placeholder: 'First Last' },
-    exact_education_dates: { path: null, label: 'Education Dates', placeholder: 'Edit in profile.json' },
-    gpa: { path: null, label: 'GPA', placeholder: 'Edit in profile.json' },
-    education: { path: null, label: 'Education', placeholder: 'Edit in profile.json' },
-    work_experience: { path: null, label: 'Work Experience', placeholder: 'Edit in profile.json' },
-    skills: { path: null, label: 'Skills', placeholder: 'Edit in profile.json' },
-    projects: { path: null, label: 'Projects', placeholder: 'Edit in profile.json' },
-    certifications: { path: null, label: 'Certifications', placeholder: 'Edit in profile.json' },
-    personality_and_work_style: { path: null, label: 'Personality', placeholder: 'Edit in profile.json' },
-    preferences_and_goals: { path: null, label: 'Preferences', placeholder: 'Edit in profile.json' },
-    cv_generation_hints: { path: null, label: 'CV Hints', placeholder: 'Edit in profile.json' },
+    exact_education_dates: { path: 'education', label: 'Education Dates', placeholder: 'Update education array (JSON)', isJson: true, type: 'textarea' },
+    gpa: { path: 'education', label: 'GPA', placeholder: 'Update education array (JSON)', isJson: true, type: 'textarea' },
+    education: { path: 'education', label: 'Education', placeholder: 'Edit education (JSON array)', isJson: true, type: 'textarea' },
+    work_experience: { path: 'work_experience', label: 'Work Experience', placeholder: 'Edit work_experience (JSON array)', isJson: true, type: 'textarea' },
+    skills: { path: 'skills', label: 'Skills', placeholder: 'Edit skills (JSON)', isJson: true, type: 'textarea' },
+    projects: { path: 'projects', label: 'Projects', placeholder: 'Edit projects (JSON array)', isJson: true, type: 'textarea' },
+    certifications: { path: 'certifications', label: 'Certifications', placeholder: 'Edit certifications (JSON array)', isJson: true, type: 'textarea' },
+    personality_and_work_style: { path: 'personality_and_work_style', label: 'Personality', placeholder: 'Edit personality (JSON)', isJson: true, type: 'textarea' },
+    preferences_and_goals: { path: 'preferences_and_goals', label: 'Preferences', placeholder: 'Edit preferences (JSON)', isJson: true, type: 'textarea' },
+    cv_generation_hints: { path: 'cv_generation_hints', label: 'CV Hints', placeholder: 'Edit hints (JSON)', isJson: true, type: 'textarea' },
   };
 
   const handleChipClick = (field) => {
     const config = fieldEditMap[field];
     if (!config?.path) return; // non-editable
     setEditingField(field);
-    setEditValue('');
+
+    if (config.isJson) {
+      const parts = config.path.split('.');
+      let current = profile;
+      for (const part of parts) {
+        if (current === undefined || current === null) break;
+        current = current[part];
+      }
+      setEditValue(current ? JSON.stringify(current, null, 2) : '[\n  \n]');
+    } else {
+      setEditValue('');
+    }
   };
 
   const handleSave = async () => {
@@ -89,9 +107,18 @@ const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, load
     const config = fieldEditMap[editingField];
     if (!config?.path) return;
 
+    let finalValue = editValue.trim();
+    if (config.isJson) {
+      try {
+        finalValue = JSON.parse(finalValue);
+      } catch (err) {
+        alert("Invalid JSON format. Please correct it.");
+        return;
+      }
+    }
+
     setSaving(true);
     try {
-      // Build nested update object from dot-path
       const parts = config.path.split('.');
       const update = {};
       let current = update;
@@ -99,13 +126,14 @@ const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, load
         current[parts[i]] = {};
         current = current[parts[i]];
       }
-      current[parts[parts.length - 1]] = editValue.trim();
+      current[parts[parts.length - 1]] = finalValue;
 
       await onUpdate(update);
       setEditingField(null);
       setEditValue('');
     } catch (err) {
       console.error('Failed to update field:', err);
+      alert('Failed to save: ' + (err.response?.data?.detail || err.message || 'Validation error'));
     } finally {
       setSaving(false);
     }
@@ -159,20 +187,34 @@ const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, load
             )}
           </div>
 
-          {/* Score badge */}
-          <div className={`flex-shrink-0 px-4 py-2 rounded-xl border ${
-            completenessScore >= 80
-              ? 'bg-emerald-500/10 border-emerald-500/20'
-              : completenessScore >= 50
-                ? 'bg-amber-500/10 border-amber-500/20'
-                : 'bg-red-500/10 border-red-500/20'
-          }`}>
-            <div className={`text-2xl font-bold font-mono ${colors.text}`}>
-              {completenessScore}%
+          {/* Score badge + refresh */}
+          <div className="flex-shrink-0 flex flex-col items-end gap-2">
+            <div className={`px-4 py-2 rounded-xl border ${completenessScore >= 80
+                ? 'bg-emerald-500/10 border-emerald-500/20'
+                : completenessScore >= 50
+                  ? 'bg-amber-500/10 border-amber-500/20'
+                  : 'bg-red-500/10 border-red-500/20'
+              }`}>
+              <div className={`text-2xl font-bold font-mono ${colors.text}`}>
+                {completenessScore}%
+              </div>
+              <div className="text-[10px] uppercase tracking-wider text-zinc-500 text-center">
+                Complete
+              </div>
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-zinc-500 text-center">
-              Complete
-            </div>
+            {onRefresh && (
+              <button
+                onClick={handleRefresh}
+                disabled={refreshing}
+                title="Re-check completeness from file"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium text-zinc-400
+                           hover:text-white bg-zinc-800/60 hover:bg-zinc-700 border border-zinc-700
+                           rounded-lg transition-colors disabled:opacity-50"
+              >
+                <RefreshCw className={`w-3 h-3 ${refreshing ? 'animate-spin' : ''}`} />
+                Check Again
+              </button>
+            )}
           </div>
         </div>
 
@@ -207,11 +249,10 @@ const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, load
                     key={field}
                     onClick={() => isEditable && handleChipClick(field)}
                     disabled={!isEditable}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
-                      isEditable
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${isEditable
                         ? 'bg-[#6C63FF]/10 border border-[#6C63FF]/20 text-[#6C63FF] hover:bg-[#6C63FF]/20 hover:border-[#6C63FF]/40 cursor-pointer'
                         : 'bg-zinc-800/50 border border-zinc-700/50 text-zinc-500 cursor-default'
-                    }`}
+                      }`}
                   >
                     {config.label}
                   </button>
@@ -229,33 +270,45 @@ const ProfileCard = ({ profile, completenessScore, missingFields, onUpdate, load
                 Edit: {fieldEditMap[editingField]?.label}
               </span>
             </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="text"
-                value={editValue}
-                onChange={(e) => setEditValue(e.target.value)}
-                placeholder={fieldEditMap[editingField]?.placeholder}
-                className="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#6C63FF]/50 focus:border-[#6C63FF]/50 transition-all"
-                autoFocus
-                onKeyDown={(e) => e.key === 'Enter' && handleSave()}
-              />
-              <button
-                onClick={handleSave}
-                disabled={saving || !editValue.trim()}
-                className="p-2.5 bg-[#6C63FF] hover:bg-[#5B54E6] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {saving ? (
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                ) : (
-                  <Check className="w-4 h-4 text-white" />
-                )}
-              </button>
-              <button
-                onClick={handleCancel}
-                className="p-2.5 bg-zinc-700 hover:bg-zinc-600 rounded-lg transition-colors"
-              >
-                <X className="w-4 h-4 text-zinc-300" />
-              </button>
+            <div className="flex items-start gap-3">
+              {fieldEditMap[editingField]?.type === 'textarea' ? (
+                <textarea
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  placeholder={fieldEditMap[editingField]?.placeholder}
+                  className="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#6C63FF]/50 focus:border-[#6C63FF]/50 transition-all font-mono min-h-[150px]"
+                  autoFocus
+                />
+              ) : (
+                <input
+                  type="text"
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  placeholder={fieldEditMap[editingField]?.placeholder}
+                  className="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#6C63FF]/50 focus:border-[#6C63FF]/50 transition-all"
+                  autoFocus
+                  onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+                />
+              )}
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={handleSave}
+                  disabled={saving || !editValue.trim()}
+                  className="p-2.5 bg-[#6C63FF] hover:bg-[#5B54E6] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                >
+                  {saving ? (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <Check className="w-4 h-4 text-white" />
+                  )}
+                </button>
+                <button
+                  onClick={handleCancel}
+                  className="p-2.5 bg-zinc-700 hover:bg-zinc-600 rounded-lg transition-colors flex items-center justify-center"
+                >
+                  <X className="w-4 h-4 text-zinc-300" />
+                </button>
+              </div>
             </div>
           </div>
         )}

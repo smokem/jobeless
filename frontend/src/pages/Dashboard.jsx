@@ -8,7 +8,7 @@ import { Inbox, Building2, Calendar, Star, MoreHorizontal } from 'lucide-react';
  * Dashboard page — Profile overview + application history table.
  */
 const Dashboard = () => {
-  const { profile, loading, completenessScore, missingFields, updateProfile } = useProfile();
+  const { profile, loading, completenessScore, missingFields, updateProfile, refreshProfile } = useProfile();
   const [history, setHistory] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(true);
 
@@ -51,6 +51,7 @@ const Dashboard = () => {
         completenessScore={completenessScore}
         missingFields={missingFields}
         onUpdate={updateProfile}
+        onRefresh={refreshProfile}
         loading={loading}
       />
 
@@ -95,7 +96,7 @@ const Dashboard = () => {
               </thead>
               <tbody className="divide-y divide-zinc-800/50">
                 {history.map((app, idx) => (
-                  <tr key={app.company_id || idx} className="hover:bg-zinc-800/20 transition-colors">
+                  <tr key={`${app.company_id || 'entry'}_${idx}`} className="hover:bg-zinc-800/20 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center">

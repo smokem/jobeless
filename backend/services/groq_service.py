@@ -42,8 +42,8 @@ async def call_groq(
         Exception: If API fails after max retries.
         ValueError: If expect_json is True but response isn't valid JSON.
     """
-    max_retries = 3
-    base_delay = 2.0  # seconds
+    max_retries = settings.LLM_MAX_RETRIES
+    base_delay = settings.LLM_RETRY_BASE_DELAY
 
     messages = [
         {"role": "system", "content": system_prompt},
@@ -66,13 +66,30 @@ async def call_groq(
                     "cultural_keywords": ["ownership", "bias-for-action", "collaboration"],
                     "tone_preference": "technical"
                 }
-            # Generator output for CV / cover letter
+            # Generator output — cover letter (must come before generic generate_ check)
+            if purpose.startswith("generate_cover_letter"):
+                return {
+                    "header": {
+                        "name": "John Doe",
+                        "email": "john@example.com",
+                        "phone": "(555) 555-5555",
+                        "date": "May 2025",
+                        "target_company": "Target Company"
+                    },
+                    "salutation": "Dear Hiring Manager,",
+                    "paragraphs": [
+                        "I'm applying for the Software Engineer role at Target Company because your focus on building practical, scalable tools matches how I think about engineering.",
+                        "At Acme Corp I reduced API response time by 40% and shipped three features that improved customer retention. I bring the same ownership mindset to every project I take on.",
+                        "I'd be glad to talk through how my background fits what you're looking for. I'm available for a call at your convenience."
+                    ],
+                    "sign_off": "Best regards,"
+                }
+            # Generator output for CV
             if purpose.startswith("generate_"):
-                # Minimal CV-like structure expected by renderers
                 return {
                     "header": {"name": "John Doe", "email": "john@example.com", "phone": "(555) 555-5555", "location": "Remote", "links": ["https://github.com/johndoe"]},
                     "education": [{"institution": "University X", "degree": "B.S.", "date": "2015-2019"}],
-                    "experience": [{"company": "Acme Corp", "role": "Engineer", "date": "2019-2023", "bullet_points": ["Built feature X","Improved Y by 30%"]}],
+                    "experience": [{"company": "Acme Corp", "role": "Engineer", "date": "2019-2023", "bullet_points": ["Built feature X", "Improved Y by 30%"]}],
                     "projects": [],
                     "skills": ["Python", "APIs", "Automation"],
                     "soft_skills": ["communication", "ownership"]
@@ -80,6 +97,15 @@ async def call_groq(
             # Discriminator / scoring mock
             if purpose.startswith("score_") or purpose.startswith("gan_discriminator"):
                 return {"score": 8.2, "notes": ["Quantify achievements", "Use action verbs"], "passed": False}
+            # Insight explanation mock
+            if purpose.startswith("explain_insight"):
+                return {
+                    "term_definition": "Taking full responsibility for a task from start to finish — including problems you didn't cause — without waiting to be told what to do next.",
+                    "why_identified": "This was identified from the job posting which explicitly mentions this requirement in the qualifications section.",
+                    "source_quote": "We value candidates who demonstrate strong ownership and technical depth.",
+                    "what_it_means": "Add a bullet point in your most recent role that shows you drove something end-to-end without being managed.",
+                    "priority": "high"
+                }
             # Generic JSON fallback
             return {"mock": True, "purpose": purpose}
 
@@ -100,14 +126,21 @@ async def call_groq(
                 "X-Title": "jobless.io"
             }
             
+            # Cap tokens per purpose to avoid credit overuse
+            if purpose.startswith("score_") or purpose.startswith("gan_discriminator"):
+                max_tokens = settings.LLM_MAX_TOKENS_SCORING
+            elif purpose.startswith("suggest_roles") or purpose.startswith("synthesize_persona"):
+                max_tokens = settings.LLM_MAX_TOKENS_ROLES
+            else:
+                max_tokens = settings.LLM_MAX_TOKENS_GENERATION
+
             payload = {
                 "model": settings.OPENROUTER_MODEL,
                 "messages": messages,
                 "temperature": 0.7,
+                "max_tokens": max_tokens,
             }
-            
-            # OpenRouter supports response_format for some models, but we'll handle parsing manually if needed
-            # or just rely on the model instructions for JSON.
+
             if expect_json and purpose != 'suggest_roles':
                 payload["response_format"] = {"type": "json_object"}
 

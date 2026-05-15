@@ -8,6 +8,7 @@ from playwright.async_api import async_playwright, Page
 
 from backend.config import settings
 from backend.models.schemas import TargetCompany
+from backend.storage import json_store
 
 logger = logging.getLogger(__name__)
 
@@ -72,17 +73,47 @@ async def easy_apply(target: TargetCompany, cv_pdf_path: str) -> dict:
             await human_delay(page)
             
             # Handle multi-step form (simplified stub sequence for resilience)
-            max_steps = 10
-            for _ in range(max_steps):
+            profile = json_store.read_profile()
+            phone_num = profile.personal_info.contact.phone if profile.personal_info.contact else "1234567890"
+
+            max_steps = 15
+            for step_num in range(max_steps):
+                logger.info(f"Navigating Easy Apply form - Step {step_num + 1}")
+                
                 # Try to find file upload
                 upload_input = page.locator("input[type='file']")
                 if await upload_input.count() > 0:
                     await upload_input.set_input_files(cv_pdf_path)
                     await human_delay()
                     
+                # Attempt to safely satisfy empty fields to prevent blocked progress
+                try:
+                    text_inputs = await page.locator("input:not([type='hidden']):not([type='file']):not([type='checkbox']):not([type='radio'])").all()
+                    for inp in text_inputs:
+                        if await inp.is_visible() and await inp.is_editable():
+                            val = await inp.input_value()
+                            if not val:
+                                aid = (await inp.get_attribute('id') or '').lower()
+                                if 'phone' in aid or 'tel' in aid:
+                                    await inp.fill(phone_num)
+                                else:
+                                    await inp.fill("3") # Default generic fallback for generic 'years experience'
+
+                    radios = await page.locator("fieldset").all()
+                    for fieldset in radios:
+                        if await fieldset.is_visible():
+                            try:
+                                has_checked = await fieldset.locator("input[type='radio']:checked").count() > 0
+                                if not has_checked:
+                                    first_radio = fieldset.locator("input[type='radio']").first
+                                    await first_radio.check(force=True)
+                            except: pass
+                except Exception as e:
+                    logger.debug(f"Form fill heuristics encountered an element resolution issue: {e}")
+
                 # Try Next button
                 next_btn = page.locator("button:has-text('Next')")
-                if await next_btn.is_visible():
+                if await next_btn.is_visible() and await next_btn.is_enabled():
                     await next_btn.click()
                     await human_delay()
                     continue

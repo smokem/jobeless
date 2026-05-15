@@ -104,12 +104,10 @@ async def get_help(company_id: str, session_id: str) -> dict:
     with open(prompt_path, "r", encoding="utf-8") as f:
         prompt_tmpl = f.read()
         
-    system_prompt = prompt_tmpl.format(
-        current_question=last_question,
-        candidate_profile="Zied Cherif - Automation & AI Engineer",
-        what_they_look_for=", ".join(meta.persona.what_they_look_for),
-        red_flags_to_avoid=", ".join(meta.persona.red_flags_to_avoid)
-    )
+    system_prompt = prompt_tmpl.replace("{current_question}", last_question) \
+        .replace("{candidate_profile}", "Zied Cherif - Automation & AI Engineer") \
+        .replace("{what_they_look_for}", ", ".join(meta.persona.what_they_look_for)) \
+        .replace("{red_flags_to_avoid}", ", ".join(meta.persona.red_flags_to_avoid))
     
     help_json = await call_groq(
         system_prompt=system_prompt,
@@ -135,13 +133,11 @@ async def end_session(company_id: str, session_id: str) -> dict:
         prefix = "Candidate" if msg.role == "user" else "Interviewer"
         history_str += f"{prefix}: {msg.content}\n"
         
-    system_prompt = prompt_tmpl.format(
-        job_title=meta.company_info.job_title,
-        company_name=meta.company_info.company_name,
-        what_they_look_for=", ".join(meta.persona.what_they_look_for),
-        red_flags_to_avoid=", ".join(meta.persona.red_flags_to_avoid),
-        transcript=history_str
-    )
+    system_prompt = prompt_tmpl.replace("{job_title}", meta.company_info.job_title) \
+        .replace("{company_name}", meta.company_info.company_name) \
+        .replace("{what_they_look_for}", ", ".join(meta.persona.what_they_look_for)) \
+        .replace("{red_flags_to_avoid}", ", ".join(meta.persona.red_flags_to_avoid)) \
+        .replace("{transcript}", history_str)
     
     score_json = await call_groq(
         system_prompt=system_prompt,

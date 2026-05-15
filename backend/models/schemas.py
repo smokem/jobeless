@@ -154,6 +154,7 @@ class HiringPersona(BaseSchema):
     red_flags_to_avoid: List[str]
     cultural_keywords: List[str]
     tone_preference: Literal["formal", "casual", "technical"]
+    personality_traits: Optional[Dict[str, float]] = None
 
 class ApplicationMeta(BaseSchema):
     company_id: str
